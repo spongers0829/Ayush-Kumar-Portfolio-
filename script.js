@@ -41,7 +41,7 @@ $(document).ready(function () {
 document.addEventListener('visibilitychange',
     function () {
         if (document.visibilityState === "visible") {
-            document.title = "Portfolio | Jigar Sable";
+            document.title = "Portfolio | Ayush Kumar";
             $("#favicon").attr("href", "assets/images/favicon.png");
         }
         else {
@@ -121,4 +121,20 @@ window.addEventListener("scroll", () => {
   }
 });
 
+// IntersectionObserver for Experience Containers
+const experienceContainers = document.querySelectorAll('.experience .container');
 
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('reveal');
+      observer.unobserve(entry.target); // Remove once revealed
+    }
+  });
+}, {
+  threshold: 0.1,
+});
+
+experienceContainers.forEach(container => {
+  observer.observe(container);
+});
